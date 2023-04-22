@@ -10,28 +10,45 @@
 
 int _printf(const char *format, ...)
 {
-	int format_map_size __attribute__ ((unused));
 	va_list args;
-
-	/* map each function with it's identifier */
 	format_t format_map[] = {
 		{'b', _printf_b},
 	};
+	int i = 0, total = 0;
 
 	/* handle format undefined case */
 	if (!format)
 		return (-1);
 
-	format_map_size = sizeof(format_map) / sizeof(format_map[0]);
 	va_start(args, format);
-
-	if (format[0] == '%' && format_map[0].format == format[1])
+	while (format[i] != '\0')
 	{
-		void *arg = va_arg(args, void *);
+		if (format[i] == '%' && format[i + 1] != '\0')
+		{
+			unsigned long j;
 
-		return (format_map[0].print_func(&arg));
+			for (j = 0; j < (sizeof(format_map) / sizeof(format_t)); j++)
+			{
+				if (format_map[j].format == format[i + 1])
+				{
+					void *arg = va_arg(args, void *);
+
+					total += format_map[j].print_func(&arg);
+					i++;
+					break;
+				}
+			}
+			i++;
+		}
+		else
+		{
+			_putchar(format[i]);
+			total++;
+			i++;
+		}
 	}
 
-	return (-1);
+	va_end(args);
+	return (total);
 }
 

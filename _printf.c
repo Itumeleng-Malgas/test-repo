@@ -13,6 +13,8 @@ int _printf(const char *format, ...)
 	va_list args;
 	format_t format_map[] = {
 		{'b', _printf_b},
+		{'c', _printf_c},
+		{'s', _printf_s},
 	};
 	int i = 0, total = 0;
 

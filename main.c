@@ -7,6 +7,6 @@
 
 int main(void)
 {
-	_printf("98 in binary: %b (success!)\n", 98);
+	_printf("98 in %s: %b (s%cccess!)\n", "binary", 45, 'u');
 	return (0);
 }

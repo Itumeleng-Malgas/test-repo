@@ -16,44 +16,18 @@ int _printf(const char *format, ...)
 		{'c', _printf_c},
 		{'s', _printf_s},
 	};
-	int i = 0, total = 0;
+	int map_size, result;
 
 	/* handle format undefined case */
 	if (!format)
 		return (-1);
 
 	va_start(args, format);
-	while (format[i] != '\0')
-	{
-		if (format[i] == '%' && format[i + 1] != '\0')
-		{
-			unsigned long j;
-			/* Handle %% case */
-			if (format[i + 1] == '%')
-				_putchar('%');
+	map_size = sizeof(format_map) / sizeof(format_t);
 
-			for (j = 0; j < (sizeof(format_map) / sizeof(format_t)); j++)
-			{
-				if (format_map[j].format == format[i + 1])
-				{
-					void *arg = va_arg(args, void *);
-
-					total += format_map[j].print_func(&arg);
-					i++;
-					break;
-				}
-			}
-			i++;
-		}
-		else
-		{
-			_putchar(format[i]);
-			total++;
-			i++;
-		}
-	}
-
+	result = _printer(format, format_map,map_size, args);
 	va_end(args);
-	return (total);
+
+	return (result);
 }
 

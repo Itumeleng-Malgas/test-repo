@@ -7,6 +7,6 @@
 
 int main(void)
 {
-	_printf("98%% in %s: %b (s%cccess!)\n", "binary", 98, 'u');
+	_printf("45 in %s is %b thi%c works 100%%\n", "binary", 45, 's');
 	return (0);
 }

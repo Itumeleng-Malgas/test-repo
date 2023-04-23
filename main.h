@@ -1,7 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 /**
- * struct format_map - This defines our key value map, so that for each key
+ * struct format_struct - This defines our key value map, so that for each key
  * (char format) we map it to the correct function to print.
  *
  * @format: format is the key we use to select the appropriate function.
@@ -9,7 +9,7 @@
  * per the key.
  */
 
-typedef struct format_map
+typedef struct format_struct
 {
 	char format;
 	int (*print_func)(void *);

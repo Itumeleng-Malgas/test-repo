@@ -28,6 +28,9 @@ int _printf(const char *format, ...)
 		if (format[i] == '%' && format[i + 1] != '\0')
 		{
 			unsigned long j;
+			/* Handle %% case */
+			if (format[i + 1] == '%')
+				_putchar('%');
 
 			for (j = 0; j < (sizeof(format_map) / sizeof(format_t)); j++)
 			{
